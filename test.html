@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio博物馆</title>
+    <!-- 内联CSS样式 -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaeaea;
+        }
+        header {
+            background-image: url('tga.png'); /* 修改: 添加背景图片 */
+            background-size: cover; /* 修改: 使背景图片覆盖整个header */
+            background-position: center; /* 修改: 使背景图片居中 */
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: textAnimation 2s infinite alternate;
+        }
+        @keyframes textAnimation {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-image: url('tgafoot.png'); /* 修改: 添加背景图片 */
+            background-size: cover; /* 修改: 使背景图片覆盖整个header */
+            background-position: center; /* 修改: 将背景图片向左移动 */
+            color: #fff;
+            text-align: center;
+            padding: 0px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 12px; /* 修改: 减少字体大小以进一步降低高度 */
+        }
+        #exhibitions {
+            margin: 10px 0;
+            padding: 0px 60px;
+            background-color: #eaeaea;
+            border-top: 10px double #ffff00;
+            border-bottom: 15px double #ffff00;
+            border-left: 0;
+            border-right: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out; /* 修改: 添加过渡效果 */
+        }
+        #exhead {
+            margin: 10px 10px 0px 10px;
+        }
+        #friend {
+            padding: 10px 10px;
+        }
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+        .toggle-button {
+            background-color: #f7fa9b;
+            color: #ffd001;
+            opacity: 0.7;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 10px 0;
+            position: relative;
+        }
+        .toggle-button::after {
+            content: '\25BC'; /* 下箭头 */
+            opacity: 0.7;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .toggle-button.active::after {
+            content: '\25B2'; /* 上箭头 */
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="head">Studio博物馆</h1>
+    </header>
+    <main>
+        <h2>欢迎来到Studio博物馆</h2>
+        <p>我们致力于展示Studio最<span class="highlight">独特优秀</span>的艺术品。</p>
+        <button class="toggle-button" onclick="toggleExhibitions()"></button> <!-- 新增: 添加按钮 -->
+        <section id="exhibitions">
+            <h3 id="exhead">展览列表</h3>
+            <ul>
+                <li><a href="https://www.bilibili.com/video/BV1mcA5eJEmR/?spm_id_from=333.999.0.0" target="_blank">最佳震撼奖</a></li>
+                <li><a href="https://www.bilibili.com/video/BV1de411n7SJ/?spm_id_from=333.788.recommend_more_video.0" target="_blank">最佳视觉奖</a></li>
+                <li><a href="https://www.bilibili.com/video/BV1zN4y1n73m/?spm_id_from=333.788.recommend_more_video.-1" target="_blank">最佳剧情奖</a></li>
+                <li><a href="https://www.bilibili.com/video/BV1ZXKKepEuJ/?spm_id_from=333.1387.homepage.video_card.click" target="_blank">最佳商业奖</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <a id="friend" href="https://piusssss.github.io/website/" target="_blank">友情链接</a>
+        <p>&copy; 2025 Studio博物馆. 保留所有权利。</p>
+    </footer>
+    <!-- 内联JavaScript -->
+    <script>
+        function toggleExhibitions() { // 新增: 添加JavaScript函数以控制展览列表的显示和隐藏
+            var exhibitions = document.getElementById('exhibitions');
+            var button = document.querySelector('.toggle-button');
+            if (exhibitions.style.maxHeight) {
+                exhibitions.style.maxHeight = null;
+                button.classList.remove('active');
+            } else {
+                exhibitions.style.maxHeight = exhibitions.scrollHeight + "px";
+                button.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
