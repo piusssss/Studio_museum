@@ -99,35 +99,40 @@
         <h2>欢迎来到Studio博物馆</h2>
         <p style="text-align: center">我们致力于展示Studio最<span class="highlight">独特优秀</span>的艺术品。</p>
 
-       <div style="display: flex;"> <!-- 父容器启用 Flexbox -->
-        <div style="background: lightblue;">
-            <img src="庇护.webp" alt="人物照片">
-            <!-- 替换为你自己的图片路径 -->
+      <div style="display: flex;"> <!-- 父容器启用 Flexbox -->
+    <div>
+        <img src="庇护.webp" alt="人物照片">
+        style="width: 200px; height: 200px; border-radius: 60%;background-color: white">
+        <!-- 替换为你自己的图片路径 -->
+    </div>
+    <div style="background-color: white">
+        <div class="person-info">
+            <h1><strong>代号：庇护</strong></h1>
+            <h2>studio创始人之一，studio画廊首席设计师</h2>
+            <p>在团队中担任狙击手，下包手，殿后者。打法多变，资源控制合理，为队伍提供巨大经济优势</p>
         </div>
-        <div style="background: lightgreen;background-color: #fdfff2">
-            <div class="person-info">
-                <h1><strong>代号：庇护</strong></h1>
-                <h2>studio创始人之一，studio画廊首席设计师</h2>
+    </div>
+</div>
 
-                <p>在团队中担任狙击手，下包手，殿后者。打法多变，资源控制合理，为队伍提供巨大经济优势</p>
-            </div>
-            </div>
+
+
+<div style="display: flex">
+    <div>
+    <img src="金牙.jpg" alt="人物照片">
+    style="width: 200px; height: 200px; border-radius: 60%;background-color: white">
+    <!-- 替换为你自己的图片路径 -->
     </div>
 
-            <div class="person-container">
-        <!-- 人物图像 -->
-        <div class="person-image">
-            <img src="金牙.jpg" alt="人物照片">
-            <!-- 替换为你自己的图片路径 -->
-        </div>
-
+<div style="background-color: white">
         <div class="person-info">
-            <h1><strong>太金牙</strong></h1>
+            <h1><strong>代号：太金牙</strong></h1>
             <h2>studio画廊设计师</h2>
             <h2>studio创始人之一兼群主</h2>
-            <p>在studio团队中常担任突破手，下包手，殿后者的身份，因发明与cyy双人内格夫架枪战术闻名于世</p>
-        
+            <p>神秘</p>
         </div>
+    </div>
+</div>
+        
             
         <button class="toggle-button" onclick="toggleExhibitions()"></button> <!-- 新增: 添加按钮 -->
         <section id="exhibitions">
