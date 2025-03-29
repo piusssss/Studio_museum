@@ -83,10 +83,47 @@
             right: 10px;
             top: 50%;
             transform: translateY(-50%);
+            transition: transform 0.3s ease; /* 添加过渡效果 */
         }
         .toggle-button.active::after {
             content: '\25B2'; /* 上箭头 */
             opacity: 0.7;
+        }
+        .person-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .person-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .person-info {
+            flex: 1;
+            padding: 10px;
+        }
+        @media (max-width: 600px) {
+            .person-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .person-container img {
+                width: 80px;
+                height: 80px;
+            }
+            .person-info h1 {
+                font-size: 1.5em;
+            }
+            .person-info h2 {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
@@ -99,44 +136,29 @@
         <h2>欢迎来到Studio博物馆</h2>
         <p style="text-align: center">我们致力于展示Studio最<span class="highlight">独特优秀</span>的艺术品。</p>
 
-
-
-        <!-- 可从此处删除 -->
-     <div style="display: flex;width: 200px; height: 200px; border-radius: 60%;background-color: white"> <!-- 父容器启用 Flexbox -->
-    <div>
-        <img src="庇护.webp" alt="人物照片">
-
-        <!-- 替换为你自己的图片路径 -->
-    </div>
-    <div style="background-color: white">
-        <div class="person-info">
-            <h1><strong>代号：庇护</strong></h1>
-            <h2>studio创始人之一，studio画廊首席设计师</h2>
-            <p>在团队中担任狙击手，下包手，殿后者。打法多变，资源控制合理，为队伍提供巨大经济优势</p>
+        <div class="person-container">
+            <div>
+                <img src="庇护.webp" alt="人物照片">
+            </div>
+            <div class="person-info">
+                <h1><strong>代号：庇护</strong></h1>
+                <h2>studio创始人之一，studio画廊首席设计师</h2>
+                <p>在团队中担任狙击手，下包手，殿后者。打法多变，资源控制合理，为队伍提供巨大经济优势</p>
+            </div>
         </div>
-    </div>
-</div>
 
-
-
-<div style="display: flex;width: 200px; height: 200px; border-radius: 60%;background-color: white">
-    <div>
-    <img src="金牙.jpg" alt="人物照片" style="width: 500px; height: 300px;">
-
-    <!-- 替换为你自己的图片路径 -->
-    </div>
-
-<div style="background-color: white">
-        <div class="person-info">
-            <h1><strong>代号：太金牙</strong></h1>
-            <h2>studio画廊设计师</h2>
-            <h2>studio创始人之一兼群主</h2>
-            <p>神秘</p>
+        <div class="person-container">
+            <div>
+                <img src="金牙.jpg" alt="人物照片">
+            </div>
+            <div class="person-info">
+                <h1><strong>代号：太金牙</strong></h1>
+                <h2>studio画廊设计师</h2>
+                <h2>studio创始人之一兼群主</h2>
+                <p>神秘</p>
+            </div>
         </div>
-    </div>
-</div>
         
-            
         <button class="toggle-button" onclick="toggleExhibitions()"></button> <!-- 新增: 添加按钮 -->
         <section id="exhibitions">
             <h3 id="exhead">展览列表</h3>
