@@ -75,6 +75,8 @@
             cursor: pointer;
             margin: 10px 0;
             position: relative;
+            font-size: 16px; /* 增加字体大小 */
+            border-radius: 5px; /* 圆角 */
         }
         .toggle-button::after {
             content: '\25BC'; /* 下箭头 */
@@ -88,6 +90,23 @@
         .toggle-button.active::after {
             content: '\25B2'; /* 上箭头 */
             opacity: 0.7;
+        }
+        .download-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .download-button {
+            background-color: #4CAF50; /* 绿色背景 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .download-button:hover {
+            background-color: #45a049; /* 悬停时的绿色背景 */
         }
         .person-container {
             display: flex;
@@ -135,6 +154,10 @@
     <main>
         <h2>欢迎来到Studio博物馆</h2>
         <p style="text-align: center">我们致力于展示Studio最<span class="highlight">独特优秀</span>的艺术品。</p>
+
+        <div class="download-container">
+            <a href="https://github.com/piusssss/Studio_museum/releases/download/game/ruarua-vs-zombie.exe" download="program.exe" class="download-button">下载我们最新的ruarua vs zombie!</a>
+        </div>
 
         <div class="person-container">
             <div>
