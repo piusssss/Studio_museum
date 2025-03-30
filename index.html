@@ -144,6 +144,73 @@
                 font-size: 1.2em;
             }
         }
+
+        /* 广告容器 */
+        .ad-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 250px;  /* 浮窗宽度 */
+            height: 180px; /* 浮窗高度 */
+        }
+
+        /* 广告浮窗主体 */
+        .ad-floating {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #ff4444;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden; /* 关键：隐藏图片溢出部分 */
+        }
+
+        /* 图片容器 */
+        .ad-image {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* 图片完全覆盖 */
+        .ad-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 关键属性：保持比例填满容器 */
+            display: block;
+        }
+
+        /* 文字叠加层 */
+        .ad-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            color: white;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        /* 关闭按钮 */
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            z-index: 3; /* 确保在顶层 */
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+
+        /* 悬停效果 */
+        .ad-floating:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
     </style>
 </head>
 <body>  
@@ -214,6 +281,24 @@
                 <p>顶级液压机二号，忠实米哈游玩家，二刺螈无可救药者，团队中的六边形可担任突破手与狙击手</p>
             </div>
         </div>
+
+
+        <!-- 广告浮窗 -->
+<div class="ad-container">
+    <div class="ad-floating" id="adPopup">
+        <!-- 关闭按钮 -->
+        <a href="#adPopup" class="close-btn">×</a>
+
+        <!-- 广告内容 -->
+        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
+            <img src="陷阱.jpg" alt="广告图片">
+            <div class="ad-text">
+                <h3>同城上门❤</h3>
+                <p>点击查看详情 →</p>
+            </div>
+        </a>
+    </div>
+</div>
         
         <button class="toggle-button" onclick="toggleExhibitions()"></button> <!-- 新增: 添加按钮 -->
         <section id="exhibitions">
