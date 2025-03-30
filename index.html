@@ -4,233 +4,569 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studio博物馆</title>
-    <!-- 内联CSS样式 -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #ffd700;
+            --secondary-color: #ff4444;
+            --accent-color: #4CAF50;
+            --dark-bg: #1a1a1a;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #eaeaea;
+            background: 
+                linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%),
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(255,215,0,0.05) 0px,
+                    rgba(255,215,0,0.05) 10px,
+                    transparent 10px,
+                    transparent 20px
+                );
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* 星空背景动画 */
+        #starfield {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* 光流效果 */
+        .light-pulse {
+            position: fixed;
+            width: 200vw;
+            height: 200vh;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite linear;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.1; }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+        }
+
         header {
-            background-image: url('tga.png'); /* 修改: 添加背景图片 */
-            background-size: cover; /* 修改: 使背景图片覆盖整个header */
-            background-position: center; /* 修改: 使背景图片居中 */
+            background-image: url('tga.png');
+            background-size: cover;
+            background-position: center;
             color: #fff;
-            padding: 10px 0;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(255,215,0,0.1) 0%,
+                rgba(255,68,68,0.1) 50%,
+                rgba(255,215,0,0.1) 100%
+            );
+            animation: gradientFlow 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            animation: textAnimation 2s infinite alternate;
+            margin: 0;
+            letter-spacing: 2px;
+            backdrop-filter: blur(2px);
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes textAnimation {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        main {
+            padding: 40px 20px 160px;
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(25, 25, 25, 0.95);
+            box-shadow: 
+                0 12px 40px rgba(0,0,0,0.3),
+                inset 0 0 30px rgba(255,215,0,0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        main::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 25%,
+                rgba(255,215,0,0.05) 50%,
+                transparent 75%
+            );
+            animation: shine 8s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes shine {
+            100% {
+                transform: translate(50%, 50%);
+            }
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            animation: textAnimation 2s infinite alternate;
+            margin: 0;
+            letter-spacing: 2px;
+            backdrop-filter: blur(2px);
+            padding: 20px;
             text-align: center;
         }
-        header h1 {
-            font-size: 3em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            animation: textAnimation 2s infinite alternate;
-        }
+
         @keyframes textAnimation {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-10px) scale(1.05); }
         }
-        main {
+
+        h2 {
+            text-align: center;
+            font-size: 1.3em;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .download-container {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
             padding: 20px;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
+
+        .download-button {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            cursor: pointer;
+            font-size: 1.2em;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .download-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .person-container {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 35px;
+            padding: 20px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            max-width: 1200px;
+        }
+
+        .person-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-color);
+            transition: 0.5s;
+        }
+
+        .person-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .person-container:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .person-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .person-container:hover img {
+            transform: scale(1.15);
+        }
+
+        .person-info h1 {
+            font-size: 1.8em;
+            color: var(--dark-bg);
+            margin: 0 0 10px;
+        }
+
+        .highlight {
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* 修复广告样式 */
+        .ad-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: bottom right;
+        }
+
+        .ad-floating {
+            width: 300px;
+            height: 220px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 2px solid var(--primary-color);
+        }
+
+        .ad-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .ad-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            border: none;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+            background: var(--secondary-color);
+        }
+
+        .ad-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .ad-text h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #exhibitions {
+            margin: 40px auto;
+            padding: 0px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s ease-out; /* 保持与原有动画一致 */
+        }
+
+        #exhead {
+            font-size: 1.8em;
+            color: var(--dark-bg);
+            text-align: center;
+            margin: 0 0 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        #exhead .icon {
+            font-size: 1.2em;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+        }
+
+        .exhibition-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 15px;
+        }
+
+        .exhibition-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .exhibition-link {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            background: rgba(255,255,255,0.9);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark-bg);
+            transition: all 0.3s ease;
+        }
+
+        .exhibition-link:hover {
+            background: var(--primary-color);
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+
+        .badge {
+            font-size: 1.8em;
+            margin-right: 15px;
+            min-width: 40px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .title {
+            font-weight: 600;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .exhibition-link:hover .title::after {
+            width: 100%;
+        }
+
+        .arrow {
+            font-size: 1.5em;
+            opacity: 0.7;
+            margin-left: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .exhibition-link:hover .arrow {
+            transform: translateX(5px);
+            opacity: 1;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .exhibition-link {
+                padding: 15px 20px;
+            }
+            
+            .badge {
+                font-size: 1.5em;
+                margin-right: 10px;
+            }
+            
+            #exhead {
+                font-size: 1.5em;
+            }
+            
+            #exhibitions {
+                padding: 15px; /* 修改后补偿值应改为 30px */
+            }
+        }
+
+        .toggle-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ffec80 100%);
+            color: var(--dark-bg);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .toggle-button::after {
+            content: '\25BC';
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-button.active::after {
+            content: '\25B2';
+            transform: rotate(180deg);
+        }
+
         footer {
             background-image: url('tgafoot.png'); /* 修改: 添加背景图片 */
             background-size: cover; /* 修改: 使背景图片覆盖整个header */
             background-position: center; /* 修改: 将背景图片向左移动 */
             color: #fff;
             text-align: center;
-            padding: 0px 0;
-            position: fixed;
+            padding: 15px 0;
             width: 100%;
             bottom: 0;
             font-size: 12px; /* 修改: 减少字体大小以进一步降低高度 */
-        }
-        #exhibitions {
-            margin: 10px 0;
-            padding: 0px 60px;
-            background-color: #eaeaea;
-            border-top: 10px double #ffff00;
-            border-bottom: 15px double #ffff00;
-            border-left: 0;
-            border-right: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out; /* 修改: 添加过渡效果 */
-        }
-        #exhead {
-            margin: 10px 10px 0px 10px;
-        }
-        #friend {
-            padding: 10px 10px;
-        }
-        .highlight {
-            color: red;
-            font-weight: bold;
-        }
-        .toggle-button {
-            background-color: #f7fa9b;
-            color: #ffd001;
-            opacity: 0.7;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            margin: 10px 0;
-            position: relative;
-            font-size: 16px; /* 增加字体大小 */
-            border-radius: 5px; /* 圆角 */
-        }
-        .toggle-button::after {
-            content: '\25BC'; /* 下箭头 */
-            opacity: 0.7;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: transform 0.3s ease; /* 添加过渡效果 */
-        }
-        .toggle-button.active::after {
-            content: '\25B2'; /* 上箭头 */
-            opacity: 0.7;
-        }
-        .download-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .download-button {
-            background-color: #4CAF50; /* 绿色背景 */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .download-button:hover {
-            background-color: #45a049; /* 悬停时的绿色背景 */
-        }
-        .person-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 80%;
-            margin: 20px auto;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .person-container img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .person-info {
-            flex: 1;
-            padding: 10px;
-        }
-        @media (max-width: 600px) {
-            .person-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .person-container img {
-                width: 80px;
-                height: 80px;
-            }
-            .person-info h1 {
-                font-size: 1.5em;
-            }
-            .person-info h2 {
-                font-size: 1.2em;
-            }
-        }
-        
-/* 广告开始处 */
-        /* 文字叠加层 */
-        .ad-text {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            color: white;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-        
-        /* 基础广告样式 */
-        .ad-container {
-            position: fixed;
-            z-index: 1000;
-            transition: all 0.5s;
-            opacity: 0;
-            transform: scale(0);
+            z-index: 1000; /* 确保高于main的z-index */
+            height: 60px; /* 显式设置高度 */
         }
 
-        /* 初始显示第一个广告 */
-        #ad1 {
-            opacity: 1;
-            transform: scale(1);
-            bottom: 20px;
-            right: 20px;
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .person-container { grid-template-columns: 1fr; text-align: center; }
+            .ad-floating { width: 250px; height: 180px; }
         }
 
-        /* 预置广告位置 */
-        #ad2 { bottom: 20px; left: 20px }
-        #ad3 { top: 20px; right: 20px }
-        #ad4 { top: 20px; left: 20px }
-
-        /* 广告激活逻辑 */
-        #ad1:target { opacity: 0; transform: scale(0) }
-        #ad1:target ~ #ad2 { opacity: 1; transform: scale(1) }
-        #ad2:target { opacity: 0; transform: scale(0) }
-        #ad2:target ~ #ad3 { opacity: 1; transform: scale(1) }
-        #ad3:target { opacity: 0; transform: scale(0) }
-        #ad3:target ~ #ad4 { opacity: 1; transform: scale(1) }
-
-        /* 广告主体样式 */
-        .ad-floating {
-            width: 280px;
-            height: 200px;
-            border: 2px solid #ff4444;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* 图片填充 */
-        .ad-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 关闭按钮 */
-        .close-btn {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 20px;
-            color: white;
-            text-decoration: none;
-            z-index: 2;
-            text-shadow: 0 0 3px black;
+        .welcome-title {
+            color: #fff !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 可选：增加文字阴影提升可读性 */
         }
     </style>
 </head>
-<body>  
-        
+<body>
+    <canvas id="starfield"></canvas>
+    <div class="light-pulse"></div>
+
     <header>
         <h1 id="head">Studio博物馆</h1>
     </header>
+
     <main>
-        <h2>欢迎来到Studio博物馆</h2>
-        <p style="text-align: center">我们致力于展示Studio最<span class="highlight">独特优秀</span>的艺术品。</p>
+        <h2 class="welcome-title">欢迎来到Studio博物馆</h2>
+        <p style="text-align: center" class="welcome-title">我们致力于展示Studio最<span class="highlight">独特优秀</span>的艺术品。</p>
 
         <div class="download-container">
-            <a href="https://github.com/piusssss/Studio_museum/releases/download/game/ruarua-vs-zombie.exe" download="program.exe" class="download-button">下载我们最新的ruarua vs zombie!</a>
+            <a href="https://github.com/piusssss/Studio_museum/releases/download/game/ruarua-vs-zombie.exe" 
+               download="program.exe" 
+               class="download-button">
+               下载我们最新的ruarua vs zombie!
+            </a>
         </div>
 
         <div class="person-container">
@@ -263,7 +599,7 @@
             <div class="person-info">
                 <h1><strong>代号：肾虚猛男爱上海绵宝宝</strong></h1>
                 <h2>studio创始人之一</h2>
-                <p>超强的身体素质，可以硬抗6个meiji，在团队中常常担任顶级突破手，家缠万贯 性格随和但内心极其阴暗可怕</p>
+                <p>超强的身体素质，可以硬抗12个meiji，在团队中常常担任顶级突破手，家缠万贯 性格随和但内心极其阴暗可怕</p>
             </div>
         </div>
 
@@ -289,99 +625,168 @@
             </div>
         </div>
 
-
-<!-- 广告浮窗 -->
-<!-- 广告容器组 -->
-<div class="ad-container" id="ad1">
-    <div class="ad-floating">
-        <a href="#ad1" class="close-btn">×</a>
-        <a href="#" target="_blank" class="ad-image">
-        <a    href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
-            <img src="陷阱.jpg" alt="广告1">
-            <div class="ad-text">
-                <h3>同城上门❤</h3>
-                <p>点击查看详情 →</p>
+        <div class="ad-container" id="ad1">
+            <div class="ad-floating">
+                <button class="close-btn" onclick="closeAd()">×</button>
+                <a href="https://piusssss.github.io/Studio_museum/ad.html" target="_blank" class="ad-image">
+                    <img src="陷阱.jpg" alt="网络安全" onerror="this.style.display='none'">
+                    <div class="ad-text">
+                        <h3>网络安全宣传</h3>
+                        <p>点击了解详情 →</p>
+                    </div>
+                </a>
             </div>
-        </a>
-        </a>
-    </div>
-</div>
+        </div>
 
-<div class="ad-container" id="ad2">
-    <div class="ad-floating">
-        <a href="#ad2" class="close-btn">×</a>
-        <a href="#" target="_blank" class="ad-image">
-        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
-            <img src="陷阱.jpg" alt="广告2">
-            <div class="ad-text">
-                <h3>同城上门❤</h3>
-                <p>点击查看详情 →</p>
-            </div>
-        </a>
-        </a>
-    </div>
-</div>
-
-<div class="ad-container" id="ad3">
-    <div class="ad-floating">
-        <a href="#ad3" class="close-btn">×</a>
-        <a href="#" target="_blank" class="ad-image">
-        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
-            <img src="陷阱.jpg" alt="广告3">
-            <div class="ad-text">
-                <h3>同城上门❤</h3>
-                <p>点击查看详情 →</p>
-            </div>
-        </a>
-        </a>
-    </div>
-</div>
-
-<div class="ad-container" id="ad4">
-    <div class="ad-floating">
-        <a href="#ad4" class="close-btn">×</a>
-        <a href="#" target="_blank" class="ad-image">
-        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
-            <img src="陷阱.jpg" alt="广告4">
-            <div class="ad-text">
-                <h3>同城上门❤</h3>
-                <p>点击查看详情 →</p>
-            </div>
-        </a>
-        </a>
-    </div>
-</div>
-
-        
-        
-        <button class="toggle-button" onclick="toggleExhibitions()"></button> <!-- 新增: 添加按钮 -->
+        <button class="toggle-button" onclick="toggleExhibitions()"></button>
         <section id="exhibitions">
-            <h3 id="exhead">展览列表</h3>
-            <ul>
-                <li><a href="https://www.bilibili.com/video/BV1mcA5eJEmR/?spm_id_from=333.999.0.0" target="_blank">最佳震撼奖</a></li>
-                <li><a href="https://www.bilibili.com/video/BV1de411n7SJ/?spm_id_from=333.788.recommend_more_video.0" target="_blank">最佳视觉奖</a></li>
-                <li><a href="https://www.bilibili.com/video/BV1zN4y1n73m/?spm_id_from=333.788.recommend_more_video.-1" target="_blank">最佳剧情奖</a></li>
-                <li><a href="https://www.bilibili.com/video/BV1ZXKKepEuJ/?spm_id_from=333.1387.homepage.video_card.click" target="_blank">最佳商业奖</a></li>
+            <h3 id="exhead">
+                <span class="icon">🎨</span>
+                精选展览
+                <span class="icon">🖼️</span>
+            </h3>
+            <ul class="exhibition-list">
+                <li class="exhibition-item">
+                    <a href="https://www.bilibili.com/video/BV1mcA5eJEmR/" 
+                       target="_blank" 
+                       class="exhibition-link">
+                        <div class="badge">🏆</div>
+                        <span class="title">最佳震撼奖</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </li>
+                <li class="exhibition-item">
+                    <a href="https://www.bilibili.com/video/BV1de411n7SJ/?spm_id_from=333.788.recommend_more_video.0/" 
+                       target="_blank" 
+                       class="exhibition-link">
+                        <div class="badge">🏆</div>
+                        <span class="title">最佳震撼奖</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </li>
+                <li class="exhibition-item">
+                    <a href="https://www.bilibili.com/video/BV1zN4y1n73m/?spm_id_from=333.788.recommend_more_video.-1" 
+                       target="_blank" 
+                       class="exhibition-link">
+                        <div class="badge">🏆</div>
+                        <span class="title">最佳震撼奖</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </li>
+                <li class="exhibition-item">
+                    <a href="https://www.bilibili.com/video/BV1ZXKKepEuJ/?spm_id_from=333.1387.homepage.video_card.click" 
+                       target="_blank" 
+                       class="exhibition-link">
+                        <div class="badge">🏆</div>
+                        <span class="title">最佳震撼奖</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </li>
             </ul>
         </section>
-    </main>
+</main>
+
     <footer>
         <a id="friend" href="https://piusssss.github.io/website/" target="_blank">友情链接</a>
         <p>&copy; 2025 Studio博物馆. 保留所有权利。</p>
     </footer>
-    <!-- 内联JavaScript -->
+
     <script>
-        function toggleExhibitions() { // 新增: 添加JavaScript函数以控制展览列表的显示和隐藏
-            var exhibitions = document.getElementById('exhibitions');
-            var button = document.querySelector('.toggle-button');
-            if (exhibitions.style.maxHeight) {
-                exhibitions.style.maxHeight = null;
+        // 星空背景动画
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speed = Math.random() * 0.5;
+                this.alpha = Math.random();
+            }
+            
+            update() {
+                this.y += this.speed;
+                if (this.y > canvas.height) this.reset();
+            }
+            
+            draw() {
+                ctx.fillStyle = `rgba(255, 215, 0, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initStars() {
+            stars = Array.from({ length: 200 }, () => new Star());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        // 初始化
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        initStars();
+        animate();
+        // 广告控制
+        function closeAd() {
+            const ad = document.getElementById('ad1');
+            ad.style.transform = 'translateY(150%) scale(0.5)';
+            ad.style.opacity = '0';
+            setTimeout(() => ad.remove(), 500);
+        }
+
+        // 折叠面板
+        function toggleExhibitions() {
+            const panel = document.getElementById('exhibitions');
+            const button = document.querySelector('.toggle-button');
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
                 button.classList.remove('active');
             } else {
-                exhibitions.style.maxHeight = exhibitions.scrollHeight + "px";
+                panel.style.maxHeight = panel.scrollHeight + "px";
                 button.classList.add('active');
             }
         }
+
+        // 视差效果
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelector('header').style.backgroundPositionY = (scrolled * 0.5) + 'px';
+        });
+
+        // 滚动动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.person-container, #exhibitions, .download-container').forEach(el => {
+                observer.observe(el);
+            });
+        });
     </script>
 </body>
 </html>
