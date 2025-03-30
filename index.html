@@ -144,43 +144,8 @@
                 font-size: 1.2em;
             }
         }
-
-        /* 广告容器 */
-        .ad-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            width: 280px;  /* 浮窗宽度 */
-            height: 230px; /* 浮窗高度 */
-        }
-
-        /* 广告浮窗主体 */
-        .ad-floating {
-            width: 100%;
-            height: 100%;
-            border: 2px solid #ff4444;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden; /* 关键：隐藏图片溢出部分 */
-        }
-
-        /* 图片容器 */
-        .ad-image {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        /* 图片完全覆盖 */
-        .ad-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 关键属性：保持比例填满容器 */
-            display: block;
-        }
-
+        
+/* 广告开始处 */
         /* 文字叠加层 */
         .ad-text {
             position: absolute;
@@ -193,6 +158,54 @@
             padding: 15px;
             box-sizing: border-box;
         }
+        
+        /* 基础广告样式 */
+        .ad-container {
+            position: fixed;
+            z-index: 1000;
+            transition: all 0.5s;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        /* 初始显示第一个广告 */
+        #ad1 {
+            opacity: 1;
+            transform: scale(1);
+            bottom: 20px;
+            right: 20px;
+        }
+
+        /* 预置广告位置 */
+        #ad2 { bottom: 20px; left: 20px }
+        #ad3 { top: 20px; right: 20px }
+        #ad4 { top: 20px; left: 20px }
+
+        /* 广告激活逻辑 */
+        #ad1:target { opacity: 0; transform: scale(0) }
+        #ad1:target ~ #ad2 { opacity: 1; transform: scale(1) }
+        #ad2:target { opacity: 0; transform: scale(0) }
+        #ad2:target ~ #ad3 { opacity: 1; transform: scale(1) }
+        #ad3:target { opacity: 0; transform: scale(0) }
+        #ad3:target ~ #ad4 { opacity: 1; transform: scale(1) }
+
+        /* 广告主体样式 */
+        .ad-floating {
+            width: 280px;
+            height: 200px;
+            border: 2px solid #ff4444;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 图片填充 */
+        .ad-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         /* 关闭按钮 */
         .close-btn {
@@ -202,14 +215,8 @@
             font-size: 20px;
             color: white;
             text-decoration: none;
-            z-index: 3; /* 确保在顶层 */
-            text-shadow: 0 0 3px rgba(0,0,0,0.5);
-        }
-
-        /* 悬停效果 */
-        .ad-floating:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s;
+            z-index: 2;
+            text-shadow: 0 0 3px black;
         }
     </style>
 </head>
@@ -283,22 +290,69 @@
         </div>
 
 
-        <!-- 广告浮窗 -->
-<div class="ad-container">
-    <div class="ad-floating" id="adPopup">
-        <!-- 关闭按钮 -->
-        <a href="https://piusssss.github.io/website/" class="close-btn">×</a>
-
-        <!-- 广告内容 -->
-        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
-            <img src="陷阱.jpg" alt="广告图片">
+<!-- 广告浮窗 -->
+<!-- 广告容器组 -->
+<div class="ad-container" id="ad1">
+    <div class="ad-floating">
+        <a href="#ad1" class="close-btn">×</a>
+        <a href="#" target="_blank" class="ad-image">
+        <a    href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
+            <img src="陷阱.jpg" alt="广告1">
             <div class="ad-text">
                 <h3>同城上门❤</h3>
                 <p>点击查看详情 →</p>
             </div>
         </a>
+        </a>
     </div>
 </div>
+
+<div class="ad-container" id="ad2">
+    <div class="ad-floating">
+        <a href="#ad2" class="close-btn">×</a>
+        <a href="#" target="_blank" class="ad-image">
+        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
+            <img src="陷阱.jpg" alt="广告2">
+            <div class="ad-text">
+                <h3>同城上门❤</h3>
+                <p>点击查看详情 →</p>
+            </div>
+        </a>
+        </a>
+    </div>
+</div>
+
+<div class="ad-container" id="ad3">
+    <div class="ad-floating">
+        <a href="#ad3" class="close-btn">×</a>
+        <a href="#" target="_blank" class="ad-image">
+        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
+            <img src="陷阱.jpg" alt="广告3">
+            <div class="ad-text">
+                <h3>同城上门❤</h3>
+                <p>点击查看详情 →</p>
+            </div>
+        </a>
+        </a>
+    </div>
+</div>
+
+<div class="ad-container" id="ad4">
+    <div class="ad-floating">
+        <a href="#ad4" class="close-btn">×</a>
+        <a href="#" target="_blank" class="ad-image">
+        <a href="https://cyberpolice.mps.gov.cn/#/" target="_blank" class="ad-image">
+            <img src="陷阱.jpg" alt="广告4">
+            <div class="ad-text">
+                <h3>同城上门❤</h3>
+                <p>点击查看详情 →</p>
+            </div>
+        </a>
+        </a>
+    </div>
+</div>
+
+        
         
         <button class="toggle-button" onclick="toggleExhibitions()"></button> <!-- 新增: 添加按钮 -->
         <section id="exhibitions">
