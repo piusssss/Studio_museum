@@ -188,8 +188,12 @@
             padding: 20px;
             background: rgba(255,255,255,0.9);
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex; /* 添加 */
+            justify-content: center; /* 添加 */
+            align-items: center; /* 添加 */
         }
 
+        /* 修改.download-button样式（原第628行附近） */
         .download-button {
             background: linear-gradient(135deg, var(--accent-color) 0%, #45a049 100%);
             color: white;
@@ -202,6 +206,8 @@
             position: relative;
             overflow: hidden;
             letter-spacing: 1px;
+            white-space: nowrap; /* 新增防止文本换行 */
+            align-items: center; /* 移除 */
         }
 
         .download-button::before {
@@ -390,7 +396,7 @@
 
         .ad-text h3 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 1em;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
@@ -513,8 +519,24 @@
                 font-size: 1.5em;
             }
             
-            #exhibitions {
-                padding: 15px; /* 修改后补偿值应改为 30px */
+            .download-button {
+                font-size: 0.7em !important; /* 减小移动端字体 */
+                padding: 12px 24px; /* 调整内边距 */
+            }
+
+            .download-container{
+                height: 25px !important;
+            }
+
+            .ad-text{
+                height: 50px !important;
+                width: 70% !important;
+                font-size: 1em !important;
+            }
+
+            .close-btn{
+                width: 20px !important;
+                height: 20px !important;
             }
         }
 
@@ -567,6 +589,88 @@
         .welcome-title {
             color: #fff !important;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 可选：增加文字阴影提升可读性 */
+        }
+
+        /* 响应式布局优化 */
+        @media (max-width: 768px) {
+            /* 人员卡片堆叠布局 */
+            .person-container {
+                grid-template-columns: 1fr !important;
+                gap: 15px;
+            }
+            .person-container img {
+                width: 80% !important;
+                max-width: 120px !important;
+                margin: 0 auto 15px;
+            }
+            
+            /* 广告尺寸优化 */
+            .ad-floating {
+                height: 130px !important;
+                width: 70% !important;
+                right: 5% !important;
+                left: 5% !important;
+                
+            }
+            
+            /* 头部标题优化 */
+            header h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            /* 展览列表优化 */
+            .exhibition-link {
+                padding: 12px 15px !important;
+                font-size: 0.9em !important;
+            }
+            .badge {
+                font-size: 1.2em !important;
+            }
+            
+            /* 导航按钮优化 */
+            .toggle-button {
+                width: 140px !important;
+                font-size: 0.9em !important;
+            }
+        }
+
+        /* 新增超小屏幕适配 */
+        @media (max-width: 480px) {
+            /* 主容器宽度适配 */
+            main {
+                padding: 20px !important;
+            }
+
+            /* 广告位置调整 */
+            .ad-container {
+                bottom: 10px !important;
+                right: 10px !important;
+            }
+
+            /* 导航按钮尺寸 */
+            .toggle-button {
+                width: 100% !important;
+                margin: 20px 0 !important;
+            }
+
+            /* 足部信息 */
+            footer {
+                font-size: 10px !important;
+                padding: 10px !important;
+            }
+        }
+
+        /* 全局响应式图片 */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 流体布局容器 */
+        .download-container,
+        .person-container,
+        #exhibitions {
+            max-width: 100% !important;
         }
     </style>
 </head>
@@ -859,6 +963,13 @@
             document.querySelectorAll('.person-container, #exhibitions, .download-container').forEach(el => {
                 observer.observe(el);
             });
+        });
+
+        // 新增视口缩放处理
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('starfield');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
     </script>
 </body>
