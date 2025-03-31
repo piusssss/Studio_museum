@@ -13,6 +13,107 @@
             --dark-bg: #1a1a1a;
         }
 
+        /* 重置默认样式 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial Narrow', Arial, sans-serif;
+        }
+
+        /* CS风格全屏加载容器 */
+        .cs-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: #fff;
+        }
+
+        /* CS风格Logo/文字 */
+        .cs-logo {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #f80; /* CS经典橙色 */
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 136, 0, 0.7);
+        }
+
+        /* 进度条容器 */
+        .cs-progress {
+            width: 300px;
+            height: 4px;
+            background-color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 进度条动画 */
+        .cs-progress-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background-color: #f80;
+            animation: progress 2.5s ease-in-out forwards;
+        }
+
+        /* 加载提示文字 */
+        .cs-loading-text {
+            margin-top: 20px;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: #ccc;
+        }
+
+        /* 页面内容 - 初始隐藏 */
+        .content {
+            display: none;
+            height: 100%;
+            background-color: #111;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* 进度条动画 */
+        @keyframes progress {
+            0% { width: 0; }
+            20% { width: 10%; }
+            40% { width: 35%; }
+            60% { width: 65%; }
+            80% { width: 85%; }
+            100% { width: 100%; }
+        }
+
+        /* CS风格按钮 */
+        .cs-button {
+            background-color: #f80;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cs-button:hover {
+            background-color: #ff9a00;
+        }
+
         body {
             font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
