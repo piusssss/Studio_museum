@@ -31,6 +31,8 @@
             overflow-x: hidden;
         }
 
+        
+
         /* 星空背景动画 */
         #starfield {
             position: fixed;
@@ -972,5 +974,43 @@
             canvas.height = window.innerHeight;
         });
     </script>
+
+
+
+    <!-- CS风格加载动画 -->
+<div class="cs-loader" id="csLoader">
+    <div class="cs-logo">STUDIO  <strong>巨献</strong></div>
+    <div class="cs-progress">
+        <div class="cs-progress-bar"></div>
+    </div>
+    <div class="cs-loading-text">Initializing game resources...</div>
+</div>
+
+<!-- 页面实际内容 -->
+<div class="content" id="content">
+    <h1>COUNTER STRIKE</h1>
+    <p>Game ready. Select your weapon.</p>
+    <button class="cs-button" onclick="location.reload()">Restart Animation</button>
+</div>
+
+<script>
+    // 页面加载完成后执行
+    window.onload = function() {
+        // 等待进度条动画完成（2.5秒）
+        setTimeout(function() {
+            const loader = document.getElementById('csLoader');
+            const content = document.getElementById('content');
+
+            // 淡出加载动画
+            loader.style.opacity = '0';
+
+            // 动画结束后移除加载元素并显示内容
+            setTimeout(function() {
+                loader.style.display = 'none';
+                content.style.display = 'block';
+            }, 500);
+        }, 2500);
+    };
+</script>
 </body>
 </html>
