@@ -1082,6 +1082,11 @@
 </div>
 
 <!-- 页面实际内容 -->
+    <div class="content" id="content">
+    <h1>COUNTER STRIKE</h1>
+    <p>Game ready. Select your weapon.</p>
+    <button class="cs-button" onclick="location.reload()">Restart Animation</button>
+</div>
 <script>
     // 页面加载完成后执行
     window.onload = function() {
@@ -1098,8 +1103,9 @@
             loader.style.opacity = '0';
 
             // 动画结束后移除加载元素并显示内容
-           setTimeout(() => {
-            loader.remove();
+           setTimeout(function() {
+                loader.style.display = 'none';
+                content.style.display = 'block';
         }, 2000);
     };
 </script>
