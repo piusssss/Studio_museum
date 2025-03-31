@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
+          
             font-family: 'Arial Narrow', Arial, sans-serif;
         }
         /* CS风格全屏加载容器 */
@@ -1090,11 +1090,16 @@
             const loader = document.getElementById('csLoader');
             const content = document.getElementById('content');
 
+            // 恢复滚动功能
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
+
             // 淡出加载动画
             loader.style.opacity = '0';
 
             // 动画结束后移除加载元素并显示内容
-           
+           setTimeout(() => {
+            loader.remove();
         }, 2000);
     };
 </script>
