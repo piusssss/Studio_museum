@@ -15,13 +15,10 @@
 
         /* 重置默认样式 */
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Arial Narrow', Arial, sans-serif;
-        }
-
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+}
         /* CS风格全屏加载容器 */
         .cs-loader {
             position: fixed;
@@ -78,13 +75,7 @@
         }
 
         /* 页面内容 - 初始隐藏 */
-        .content {
-            display: none;
-            height: 100%;
-            background-color: #111;
-            color: #fff;
-            padding: 20px;
-        }
+    
 
         /* 进度条动画 */
         @keyframes progress {
@@ -1088,13 +1079,7 @@
 </div>
 
 <!-- 页面实际内容 -->
-<div class="content" id="content">
-    <h1>COUNTER STRIKE</h1>
-    <p>Game ready. Select your weapon.</p>
-    <button class="cs-button" onclick="location.reload()">Restart Animation</button>
-</div>
 
-<script>
     // 页面加载完成后执行
     window.onload = function() {
         // 等待进度条动画完成（2.5秒）
