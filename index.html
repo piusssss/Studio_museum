@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
+            
             font-family: 'Arial Narrow', Arial, sans-serif;
         }
         /* CS风格全屏加载容器 */
@@ -1085,7 +1085,7 @@
 
     // 页面加载完成后执行
     window.onload = function() {
-        // 等待进度条动画完成（2.5秒）
+        // 等待进度条动画完成（2秒）
         setTimeout(function() {
             const loader = document.getElementById('csLoader');
             const content = document.getElementById('content');
@@ -1095,7 +1095,7 @@
 
             // 动画结束后移除加载元素并显示内容
            
-        }, 2500);
+        }, 2000);
     };
 </script>
 </body>
